@@ -6,7 +6,7 @@ NAME	=	ft_ssl
 ############## FLAGS #################
 CC		=	clang
 FLAGS	=	-Wall -Wextra -Werror
-INC     =	-Iincludes
+INC     =	-Iinclude
 LIB	    =	-L./libft -LIBFT
 
 ############## PATH ##################
