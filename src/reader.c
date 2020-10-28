@@ -11,7 +11,7 @@ int		ft_open(char *file)
 	return (0);
 }
 
-void    reader(int argc, char **argv)
+void    parser(int argc, char **argv)
 {
 	ft_putendl("HOO");
     if (argc >= 1)

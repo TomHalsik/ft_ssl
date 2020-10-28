@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/03/15 11:20:25 by cpieri            #+#    #+#              #
-#    Updated: 2019/04/11 16:35:38 by cpieri           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 
 NAME	=	ft_ssl
 
@@ -35,11 +23,7 @@ DEPS =		Makefile				\
 SRC_NAME= 	ft_ssl.c						\
 			reader.c
 
-
-
-
-.PHONY:	all clean fclean re echo norm
-
+################## RULES ###################
 all:		LFT $(NAME)
 
 $(NAME):	libft echo $(OBJ)
@@ -50,8 +34,8 @@ echo:
 			@echo "Generating $(NAME) :"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(DEPS)
-			@mkdir $(dir $@) 2> /dev/null || true
-			@$(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS) && printf "[OK]Generation of %-50s\r" "$@"
+			@mkdir -p obj
+			@$(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS) && printf "[OK] Generation of %s\r" "$@"
 
 clean:
 			@echo "Cleaning :"
@@ -69,3 +53,5 @@ re:			fclean all
 LFT:
 		@echo "Generating libft :"
 		@make -C ./libft/ --no-print-directory
+
+.PHONY:	all clean fclean re echo norm

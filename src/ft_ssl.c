@@ -2,7 +2,6 @@
 
 int		main(int argc, char **argv)
 {
-    ft_putstr("HELL");
-    reader(argc, argv);
+    parser(argc, argv);
     return (0);
 }

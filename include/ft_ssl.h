@@ -15,7 +15,6 @@
 ******************************** Functions *************************************
 */
 
-void    reader(int argc, char **argv);
-unsigned char	*read();
+void    parser(int argc, char **argv);
 
 #endif
