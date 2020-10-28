@@ -1,68 +1,59 @@
-NAME = ft_ssl
 
-CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
-CC = gcc
-LIBFT = lib/libft/libft.a
 
-OBJDIR = obj
-SRCDIR = src
+############## NAME ##################
+NAME	=	ft_ssl
 
-SC = $(addsuffix .c, ft_ssl reader)
+############## FLAGS #################
+CC		=	clang
+FLAGS	=	-Wall -Wextra -Werror
+INC     =	-Iincludes
+LIB	    =	-L./libft -LIBFT
 
-SRCS = $(addprefix $(SRCDIR)/, $(SC))
-OBJS = $(addprefix $(OBJDIR)/, $(SC:.c=.o))
-INCLS = $(addprefix ./include/, $(addsuffix .h, ft_ssl))
+############## PATH ##################
+SRC_DIR =	src
+OBJ_DIR =	obj
+OBJ_NAME=	$(SRC_NAME:.c=.o)
+SRC		=	$(addprefix $(SRC_DIR)/,$(SRC_NAME))
+OBJ		=	$(addprefix $(OBJ_DIR)/,$(OBJ_NAME))
 
-GREEN = \033[01;32m
-BLUE = \033[01;34m
-_BLUE=$ \x1b[36m
-GREY=$ \x1b[33m
-RED = \033[01;31m
-YELLOW = \033[01;33m
-MAGENTA = \033[35m
-BLACK = \033[30m
-NOCOLOR = \033[0m
-WHITE=$ \x1b[37m
+############## DEPENDANCES ###########
+DEPS    =	Makefile				\
+			include/ft_ssl.h		\
+			libft/libft.a
 
-BOLD= \033[1m
+############## FILES ##################
+SRC_NAME= 	ft_ssl.c				\
+			reader.c
 
-all: $(NAME)
+############## PHONY ##################
+.PHONY:	all clean fclean re echo norm
 
-$(NAME): lib $(OBJS) $(INCLS) Makefile
-	@echo " $(BOLD) ~~~~~~~~~~~~~~~ Generation ~~~~~~~~~~~~~~~ "
-	@$(CC) $(CFLAGS) $(LIBFTPRINTF) $(LIBFT) $(OBJS) -o $(NAME)
-	@echo "$(GREEN) [OK] $(NOCOLOR) Tous les objets de $(NOCOLOR) $(NAME) $(_BLUE) sont generes !\r"
-	@echo "$(GREEN) [OK] $(NOCOLOR) Compilation de $(NOCOLOR) $(NAME) \n"
+############## RULES ##################
+all:		LIBFT $(NAME)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-		@mkdir -p obj
-	  @$(CC) $(CFLAGS) -c -o $@ $< && printf "$(GREEN) [OK] $(GREY) Generation de $(NOCOLOR) %-50s\r" "$@" || \
-		(echo "$(_RED) [ERREUR] $(_GRAY) Une est erreur est survenue sur $(NOCOLOR) $< $(RED), $(NOCOLOR) $(NAME) $(RED) non compilé(e)\n" && exit 1)
+$(NAME):	libft echo $(OBJ)
+			@$(CC) $(OBJ) -o $(NAME) $(INC) $(LIB) $(FLAGS)
+			@echo "\n[OK] Compilation of $(NAME) \n"
 
-lib: menu_lib $(LIBFT)
+echo:
+			@echo "Generating $(NAME) :"
 
-menu_lib: FORCE
-	@echo "$(BOLD) $(BLUE) ~~~~~~~~~~~~~~~ Library ~~~~~~~~~~~~~~~~~~ "
-
-$(LIBFT): FORCE
-	@make -C lib/libft/
-	@echo "$(NOCOLOR)"
-
-FORCE:
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEPS)
+			@mkdir $(dir $@) 2> /dev/null || true
+			@$(CC) -c $< -o $@ $(FLAGS) $(INC) && printf "[OK] Generation of %-50s\r" "$@"
 
 clean:
-	@echo "$(BOLD) $(RED) ~~~~~~~~~~~~ Delete ~~~~~~~~~~~~~~~~"
-	@echo "$(GREEN) [OK] $(NOCOLOR) Supression des objets de $(NOCOLOR) $(NAME)"
-	@echo "$(GREEN) [OK] $(NOCOLOR) Supression des objets de $(NOCOLOR) libft.a"
-	@make clean -C lib/libft
-	@rm -f $(OBJS)
-	@rm -rf $(OBJDIR)
+			@echo "Cleaning :"
+			@make clean -C ./libft/ --no-print-directory
+			@/bin/rm -f $(OBJ)
+			@rm -rf $(OBJ_DIR) 2> /dev/null || true
 
-fclean: clean
-	@echo "$(GREEN) [OK] $(RED) Supression de $(NOCOLOR) $(NAME)"
-	@make fclean -C lib/libft
-	@rm -f $(NAME)
+fclean:		clean
+			@make fclean -C ./libft/ --no-print-directory
+			@/bin/rm -f $(NAME)
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re libft/libft.a menu_lib
+LIBFT:
+		@echo "Generating libft :"
+		@make -C ./libft/ --no-print-directory

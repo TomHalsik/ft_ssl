@@ -1,6 +1,6 @@
 #ifndef FT_LS_H
 # define FT_LS_H
-# include "../lib/libft/libft.h"
+# include "../libft/libft.h"
 # include <string.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -16,5 +16,6 @@
 */
 
 void    reader(int argc, char **argv);
+unsigned char	*read();
 
 #endif

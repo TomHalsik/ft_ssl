@@ -10,13 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-############## COLORS ##################
-_WHITE=$ \x1b[37m
-_BLUE=$ \x1b[36m
-_GREEN=$ \033[1;32m
-_GREY=$ \x1b[33m
-_RED=$ \x1b[31m
-
 ############## FLAGS ##################
 
 NAME= libft.a
@@ -108,21 +101,20 @@ OBJECTS	= $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@echo "$(_GREEN)[OK] $(_BLUE)Tous les objets de $(_WHITE)$(NAME) $(_BLUE)sont generes !\r"
-	@ar rc $(NAME) $(OBJECTS) || printf "\n$(_RED)[ERREUR]$(_GREY) Une est erreur est survenue $(_WHITE)$(NAME)\n"
+	@echo "[OK] All $(NAME) objects generated !\r"
+	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
-	@echo "$(_GREEN)[OK] $(_BLUE)Compilation de $(_WHITE)$(NAME)"
+	@echo "[OK] Compilation of $(NAME) \n"
 
 %.o: %.c
-	@$(CC) $(CFLAGS)  -o $@ -c $< && printf "$(_GREEN)[OK] $(_BLUE)Generation de $(_WHITE)%-50s\r" "$@" || \
-		(echo "$(_RED)[ERREUR]$(_GRAY) Une est erreur est survenue sur $(_WHITE)$<$(_RED), $(_WHITE)$(NAME)$(_RED) non compilé(e)\n" && $(MAKE) fclean && exit 1)
+	@$(CC) $(CFLAGS)  -o $@ -c $< && printf "$(_GREEN)[OK]Generation of%-50s\r" "$@"
 
 clean:
 	@rm -rf $(OBJECTS)
 
 fclean: clean
 	@rm -rf $(NAME) $(EXE)
-	@echo "$(_GREEN)[OK]$(_RED) Supression de $(_WHITE)$(NAME)"
+	@echo "$(_GREEN)[OK] $(NAME) deleted  \n"
 
 re: fclean all
-	@echo "$(_GREEN)[OK]$(_BLUE) Succes $(_WHITE)"
+	@echo "$(_GREEN)[OK] Succes \n"
