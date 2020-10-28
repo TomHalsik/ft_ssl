@@ -107,14 +107,14 @@ $(NAME): $(OBJECTS)
 	@echo "[OK] Compilation of $(NAME) \n"
 
 %.o: %.c
-	@$(CC) $(CFLAGS)  -o $@ -c $< && printf "$(_GREEN)[OK]Generation of%-50s\r" "$@"
+	@$(CC) $(CFLAGS)  -o $@ -c $< && printf "[OK]Generation of%-50s\r" "$@"
 
 clean:
 	@rm -rf $(OBJECTS)
 
 fclean: clean
 	@rm -rf $(NAME) $(EXE)
-	@echo "$(_GREEN)[OK] $(NAME) deleted  \n"
+	@echo "$(_GREEN)[OK] $(NAME) deleted"
 
 re: fclean all
 	@echo "$(_GREEN)[OK] Succes \n"

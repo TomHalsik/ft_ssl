@@ -1,4 +1,4 @@
-#include "../include/ft_ssl.h"
+#include "ft_ssl.h"
 #include <stdio.h>
 
 int		ft_open(char *file)
@@ -13,11 +13,11 @@ int		ft_open(char *file)
 
 void    reader(int argc, char **argv)
 {
-	printf(" ARG : %d \n", argc);
+	ft_putendl("HOO");
     if (argc >= 1)
     {
         printf("%s", argv[0]);
     }
     else
-        printf("no");
+        ft_putstr("no");
 }
