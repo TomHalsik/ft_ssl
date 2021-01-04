@@ -2,6 +2,7 @@
 
 int		main(int argc, char **argv)
 {
-    parser(argc, argv);
+    t_env env;
+    parser(argc, argv, &env);
     return (0);
 }

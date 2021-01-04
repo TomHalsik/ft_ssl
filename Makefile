@@ -21,7 +21,7 @@ DEPS =		Makefile				\
 
 ################## FILES ###################
 SRC_NAME= 	ft_ssl.c						\
-			reader.c
+			parser.c
 
 ################## RULES ###################
 all:		LFT $(NAME)
